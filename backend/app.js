@@ -3,9 +3,15 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const fs = require("fs");
+const { parse } = require("csv-parse");
+
+const { transformDataForRedis } = require('./utils/transformDataForRedis');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const productRouter = require('./routes/products');
+const { initServer } = require('./utils/initServer');
 
 var app = express();
 
@@ -22,10 +28,21 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
+let allProducts = [];
+
+fs.createReadStream("./data/products.csv")
+  .pipe(parse({ delimiter: ",", from_line: 2 }))
+  .on("data", function (row) {
+    allProducts.push(row);
+  })
+  .on("end", function () {
+    const productsData = transformDataForRedis(allProducts)
+    initServer(productsData);
+    console.log("finished");
+  })
+  .on("error", function (error) {
+    console.log(error.message);
+  });
 
 // error handler
 app.use(function(err, req, res, next) {
