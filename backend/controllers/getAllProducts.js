@@ -1,9 +1,4 @@
-const redis = require('redis');
-const client = redis.createClient({
-  host:'127.0.0.1',
-  port:6379
-})
-
+const { client } = require('../redis/index');
 const { productFilterKeys } = require('../dictionary/productFilterKeys');
 const { getFilteredArray } = require('../utils/getFilteredArray');
 
