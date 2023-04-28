@@ -1,4 +1,10 @@
 .pieContainer {
-  width: 1000px;
+  max-width: 1000px;
+  width: fit-content;
+  margin: auto;
   height: 500px;
+}
+
+.pieChart {
+  display: inline;
 }

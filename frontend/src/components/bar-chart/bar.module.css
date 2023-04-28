@@ -1,5 +1,10 @@
 .barContainer {
   border: 1px solid black;
   border-radius: 15px;
-  padding: 10px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.barChart {
+  display: inline;
 }

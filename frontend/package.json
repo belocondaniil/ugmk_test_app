@@ -7,11 +7,14 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "dockerize": "docker build -t ugmk_test_app:latest .",
+    "start-container": "docker run -d -it -p 3000:80 --rm --name ugmk_test_app ugmk_test_app:latest"
   },
   "dependencies": {
     "axios": "^1.4.0",
     "chart.js": "^4.3.0",
+    "chart.js-plugin-labels-dv": "^4.0.0",
     "chartjs-plugin-datalabels": "^2.2.0",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",

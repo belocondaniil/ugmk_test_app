@@ -1,0 +1,21 @@
+{
+  "name": "ugmk_test_app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "",
+  "scripts": {
+    "dockerize": "docker-compose build",
+    "start-container": "docker-compose -p ugmk_test_app up -d",
+    "stop-container": "docker-compose down"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/belocondaniil/ugmk_test_app.git"
+  },
+  "author": "Belokon Daniil",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/belocondaniil/ugmk_test_app/issues"
+  },
+  "homepage": "https://github.com/belocondaniil/ugmk_test_app#readme"
+}

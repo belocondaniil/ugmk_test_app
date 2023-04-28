@@ -3,7 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "prod": "NODE_ENV=production node ./bin/www",
+    "dockerize": "docker build -t ugmk_test_app_backend:latest .",
+    "start-container": "docker run -d -it -p 3001:3001 --rm --name ugmk_test_app_backend ugmk_test_app_backend:latest"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",

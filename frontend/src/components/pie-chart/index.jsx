@@ -6,6 +6,7 @@ import { api } from '../../api';
 import { useEffect, useState } from 'react';
 import { fabricLabelsKeys } from '../../dictionaty/fabricLabelsKeys';
 import { monthKeys } from '../../dictionaty/monthKeys';
+import 'chart.js-plugin-labels-dv';
 
 
 const getProductsByMonth = async (fabricId, monthId) => {
@@ -34,9 +35,12 @@ function PieChart() {
 
   const options = {
     plugins: {
+      labels: {
+        position: 'outside',
+      },
       datalabels: {
         anchor: 'center',
-        color: 'blue',
+        color: 'black',
       },
       title: {
         text: `Статистика по продукции ${fabricLabelsKeys[fabricId]} за ${monthKeys[monthId]}`,
@@ -55,13 +59,10 @@ function PieChart() {
   return (
     <div className={styles.pieContainer}>
       <Pie
-      style={{
-        display: 'inline',
-      }}
-      className='pie-chart'
-      type='arc'
-      options={options}
-      data={PieChartData}
+        className={styles.pieChart}
+        type='arc'
+        options={options}
+        data= {PieChartData}
       />
     </div>
   )

@@ -1,0 +1,40 @@
+version: "3.9"
+
+services:
+
+  web:
+    container_name: test_app_web
+    build:
+      context: ./frontend
+    ports:
+      - 3000:80
+    networks:
+      - default
+
+  back:
+    container_name: test_app_back
+    build:
+      context: ./backend
+    env_file:
+     - ./backend/.env
+    environment:
+      REDIS_HOST: 'redis'
+    ports:
+      - "3001:3001"
+    command: bash -c "npm run start"
+    restart: always
+    networks:
+      - default
+
+  redis:
+    container_name: redis
+    image: redis
+    ports:
+      - "6379:6379"
+    restart: always
+    networks:
+      - default
+
+
+networks:
+  default: {}
