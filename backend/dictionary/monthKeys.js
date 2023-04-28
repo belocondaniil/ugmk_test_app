@@ -1,16 +1,16 @@
 const monthKeys = {
-  December: 0,
-  January: 1,
-  February: 2,
-  March: 3,
-  April: 4,
-  May: 5,
-  June: 6,
-  July: 7,
-  August: 8,
-  September: 9,
-  October: 10,
-  November: 11,
+  Янв: 0,
+  Фев: 1,
+  Мар: 2,
+  Апр: 3,
+  Май: 4,
+  Июн: 5,
+  Июл: 6,
+  Авг: 7,
+  Сен: 8,
+  Окт: 9,
+  Ноя: 10,
+  Дек: 11,
 
 };
 

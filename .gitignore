@@ -1,3 +1,6 @@
 node_modules/
 
+development.backend.env
+.env
+
 .history

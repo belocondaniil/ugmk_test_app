@@ -1,18 +1,27 @@
-const { fabricKeys } = require('../dictionary/fabricKeys');
+const { client } = require('../redis/index');
 const { monthKeys } = require('../dictionary/monthKeys');
 
 async function getProductsByMonth(req, res) {
-  const { month, fabric } = req.params.month
+  try {
+  const { month, fabricId } = req.params
 
-  const fabricsProducts = await client.get('fabrics_products');
+  const fabricsProductsString = await client.get('fabrics_products');
+  const fabricsProducts = JSON.parse(fabricsProductsString)
 
-  const data = fabricKeys.map((id, label) => ({
-    label,
-    data: fabricsProducts[id].data[monthKeys[month]]
+  const data = {
+    label: fabricsProducts[`${fabricId}`].label,
+    data: fabricsProducts[`${fabricId}`].data[monthKeys[month]]
+  };
+
+  res.status(200).send({
+    status: 200,
+    data,
   })
-  )
-
-  res.send(data)
+} catch(error) {
+  res.status(500).send({
+    status: 500,
+  })
+}
 };
 
 module.exports = {

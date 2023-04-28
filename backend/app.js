@@ -8,12 +8,12 @@ const { parse } = require("csv-parse");
 
 const { transformDataForRedis } = require('./utils/transformDataForRedis');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-const productRouter = require('./routes/products');
+const { productRouter } = require('./routes/products');
 const { initServer } = require('./utils/initServer');
 
-var app = express();
+const app = express();
+
+require('dotenv').config();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -25,8 +25,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/api/', productRouter);
 
 let allProducts = [];
 
