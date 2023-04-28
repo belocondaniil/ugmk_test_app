@@ -4,22 +4,13 @@ const { getFilteredArray } = require('../utils/getFilteredArray');
 
 async function getAllProducts(req, res) {
   try {
-    const requiredProduct = req.params.product;
+    const { product = productFilterKeys.all } = req.params;
     const fabricsProductsString = await client.get('fabrics_products');
     const fabricsProducts = JSON.parse(fabricsProductsString)
-    console.log(requiredProduct)
-
-
-    if (!requiredProduct || requiredProduct === productFilterKeys.all) {
-      return res.send({
-      success: true,
-      data: fabricsProducts
-    });
-  }
 
     const filteredData = fabricsProducts.map(({ data, ...info }) => ({
       ...info,
-      data: getFilteredArray(data, requiredProduct),
+      data: getFilteredArray(data, product),
     }));
 
     return res.send({
@@ -27,7 +18,6 @@ async function getAllProducts(req, res) {
       data: filteredData
     });
   } catch(err) {
-    console.log(err);
     res
     .status(500)
     .send({
