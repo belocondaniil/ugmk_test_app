@@ -7,6 +7,13 @@ $ npm run dockerize
 $ npm run start-container
 ```
 
+### Delete docker compose container.<Br/>
+Docker compose does not support auto deletion of a container after a stop.
+
+```bash
+$ npm run stop-container
+```
+
 ## Local start
 
 ### Backend
