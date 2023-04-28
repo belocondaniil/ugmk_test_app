@@ -19,9 +19,9 @@ function fillRecords(initData, data) {
     if (!month) return obj;
 
     const factoryId = record[productKeys.factory_id];
-    const product1 = Number(record[productKeys.product1]) / 1000;
-    const product2 = Number(record[productKeys.product2]) / 1000;
-    const product3 = Number(record[productKeys.product3]) / 1000;
+    const product1 = Math.round((record[productKeys.product1]) / 1000);
+    const product2 = Math.round((record[productKeys.product2]) / 1000);
+    const product3 = Math.round((record[productKeys.product3]) / 1000);
 
     if (!obj[factoryId].data[month - 1]) obj[factoryId].data[month - 1] = {};
 

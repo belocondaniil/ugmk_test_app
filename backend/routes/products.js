@@ -6,6 +6,6 @@ const { getProductsByMonth } = require('../controllers/getProductsByMonth')
 const productRouter = express.Router();
 
 productRouter.get('/:product?', getAllProducts);
-productRouter.get('/:month/:fabricId', getProductsByMonth);
+productRouter.get('/:fabricId/:monthId', getProductsByMonth);
 
 module.exports = { productRouter };

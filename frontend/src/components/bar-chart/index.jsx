@@ -1,26 +1,10 @@
-import {
-  Chart,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-} from 'chart.js';
 import PropTypes from 'prop-types';
 import { Bar } from "react-chartjs-2";
-import './styles.css';
-
-Chart.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-)
+import styles from './bar.module.css';
+import { useNavigate } from 'react-router-dom';
 
 function BarChart({ data }) {
+  const navigate = useNavigate();
   const datasets = data.map((item, index) => {
     const color = index === 0 ? "#FE0000" : "#0000FE"
     return {
@@ -37,35 +21,45 @@ function BarChart({ data }) {
     datasets,
   };
 
+  const options = {
+    onClick: ((event, elements) => {navigateToPieDiagram(elements)}),
+    scales: {
+      x: {
+        grid: {
+          display: false
+        }
+      },
+      y: {
+        grid: {
+          display: false
+        }
+      }
+    },
+    plugins: {
+      datalabels: {
+        display: false,
+      },
+      legend: {
+        display: true,
+        position: "bottom"
+      }
+    }
+  }
+
+  const navigateToPieDiagram = (element) => {
+    const { datasetIndex: fabricId, index: monthId } = element[0];
+    navigate(`/${fabricId}/${monthId}`);
+  }
+
   return (
-    <div className='bar-container'>
+    <div className={styles.barContainer}>
       <Bar
       style={{
         display: 'inline',
       }}
       className='bar-chart'
       type='bar'
-      options={{
-        onClick: (event, elements) => console.log('%c%s', 'color:#DFA', '>>> val: ', event, elements),
-        scales: {
-          x: {
-            grid: {
-              display: false
-            }
-          },
-          y: {
-            grid: {
-              display: false
-            }
-          }
-        },
-        plugins: {
-          legend: {
-            display: true, //Is the legend shown?
-            position: "bottom" //Position of the legend.
-          }
-        }
-      }}
+      options={options}
       data={barChartData}
       />
     </div>

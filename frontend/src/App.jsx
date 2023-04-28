@@ -1,8 +1,19 @@
 import { useEffect, useState } from 'react';
+import {
+  Chart,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+  ArcElement,
+} from 'chart.js';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+
 import './App.css'
 import { api } from './api';
 import BarChart from './components/bar-chart';
-import PieChart from './components/pie-chart';
 import Filter from './components/filter';
 
 const serverApi = async (filterValue) => {
@@ -13,6 +24,17 @@ const serverApi = async (filterValue) => {
     console.log(e)
   }
 }
+
+Chart.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+  ArcElement,
+  ChartDataLabels
+)
 
 function App() {
   const [data, setData] = useState([]);

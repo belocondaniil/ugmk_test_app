@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-import './styles.css';
+import styles from './filter.module.css';
 
 function Filter({ filterValue ,changeFilterValue }) {
   function changeSelect() {
@@ -8,9 +8,9 @@ function Filter({ filterValue ,changeFilterValue }) {
  }
 
   return (
-    <div className='filter-container'>
-      <text className='filter-text'>Фильтр по типу продукции</text>
-      <select className='filter-select' value={filterValue} onChange={changeSelect}>
+    <div className={styles.filterContainer}>
+      <text>Фильтр по типу продукции</text>
+      <select className={styles.filterSelect} value={filterValue} onChange={changeSelect}>
          <option value="product1">Продукт 1</option>
          <option value="product2">Продукт 2</option>
          <option value="product3">Продукт 3</option>

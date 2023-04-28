@@ -13,6 +13,8 @@ async function getAllProducts(req, res) {
       data: getFilteredArray(data, product),
     }));
 
+    console.log('%c%s', 'color:#DFA', '>>> filteredData: ', filteredData)
+
     return res.send({
       success: true,
       data: filteredData
